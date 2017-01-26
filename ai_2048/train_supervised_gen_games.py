@@ -130,12 +130,11 @@ if __name__ == "__main__":
     n_games = int(1e5)
     nb_hidden = 256
     batch_size = 128
-    learning_rate = 1e-3
     nb_actions = 4
-    n_test_games = 10
-    # play test games after fitting on 'n' samples (i.e. observations of gaming board + actions)
+    n_test_games = 100
+    # play test games after fitting on 'n' games
     evaluate_after_n_games = 100
-    
+
     # Keras NN model
     model = Sequential([
         Flatten(input_shape=(4, 4)),
@@ -204,7 +203,7 @@ if __name__ == "__main__":
     else:
         logger.setLevel(logging.INFO)
 
-    model.compile(loss="categorical_crossentropy", optimizer=Adam(lr=learning_rate), metrics=["accuracy", "categorical_crossentropy"])
+    model.compile(loss="categorical_crossentropy", optimizer=Adam(), metrics=["accuracy", "categorical_crossentropy"])
 
     i_games = 0
     i_games_current = 0
