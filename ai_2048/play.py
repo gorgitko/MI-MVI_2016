@@ -108,7 +108,20 @@ def render_board(board):
                       aa=True)
 
 
-def play(board):
+def play(board, save_normalized_matrix=True):
+    """
+    Parameters
+    ----------
+    board : numpy.array
+    save_normalized_matrix : bool
+        Whether to save normalized (log2 transformed) or original matrix.
+
+    Returns
+    -------
+    collections.namedtuple
+        Game with recorded steps.
+    """
+
     steps = []
     render_board(board)
 
@@ -119,7 +132,7 @@ def play(board):
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key in POSSIBLE_ACTIONS:
-                    matrix = board.matrix
+                    matrix = board.normalized_matrix if save_normalized_matrix else board.matrix
                     action = POSSIBLE_ACTIONS[event.key]
                     moved = board.move(action)
 
