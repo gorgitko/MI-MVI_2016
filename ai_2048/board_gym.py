@@ -95,6 +95,7 @@ class GymBoard(object):
         ----------
         action : object
             An action provided by the environment.
+
         Returns
         -------
         observation : object
@@ -154,7 +155,7 @@ class GymBoard(object):
         """
         Returns
         -------
-        gaming board shape : tuple(int, int)
+        tuple(int, int)
             Tuple of the gaming board shape, i.e. the Numpy 2D array dimensions -> (rows, columns)
         """
 
@@ -179,7 +180,7 @@ class GymBoard(object):
         
         Returns
         -------
-        tile value : int
+        int
             2 with probability of ~0.9 or 4 with probability of ~0.1
         """
 
@@ -196,7 +197,7 @@ class GymBoard(object):
         
         Returns
         -------
-        initialized gaming board : numpy.array
+        numpy.array
         """
 
         matrix = np.zeros(shape=(height, width), dtype=np.int32)
@@ -239,7 +240,8 @@ class GymBoard(object):
 
         Returns
         -------
-        merged array : numpy.array
+        numpy.array
+            Merged numpy array.
         
         Examples
         --------
@@ -299,7 +301,7 @@ class GymBoard(object):
 
         Returns
         -------
-        move status : bool
+        bool
             True if move was succesful, False otherwise (e.g. invalid move was performed).
         """
 
@@ -364,7 +366,7 @@ class GymBoard(object):
         """
         Returns
         -------
-        is full : bool
+        bool
             True if board doesn't contain zero (empty) tiles, False otherwise.
         """
 
@@ -376,7 +378,7 @@ class GymBoard(object):
         
         Returns
         -------
-        is game over : bool
+        bool
             True if game is over, False otherwise.
         """
 
