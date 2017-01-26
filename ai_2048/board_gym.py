@@ -67,7 +67,7 @@ class GymBoard(object):
         """
     
         if not random_seed:
-            self.random_seed = np.random.randint(0, 4294967294)
+            self.random_seed = np.random.randint(0, 4294967294, dtype=np.int64)
         else:
             self.random_seed = random_seed
         self.random_state = np.random.RandomState(self.random_seed)
