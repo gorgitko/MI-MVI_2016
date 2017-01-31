@@ -15,7 +15,7 @@ Reading
 """
 
 from board_gym import GymBoard
-from callbacks import TrainLogger2048, TestLogger2048
+from callbacks import Logger2048
 from util import save_history, get_callback, play_random_game
 
 from keras.layers import Dense, GRU, Activation, Embedding, Reshape, Input, LSTM, Flatten
@@ -214,10 +214,10 @@ if __name__ == "__main__":
             print("Model exists, skipping training...\n")
             dqn.load_weights(model_file_prev.format(model_name=model_name, type="weights"))
         else:
-            callbacks = dqn.fit(env, nb_steps=nb_steps, visualize=False, verbose=2, callbacks=[TrainLogger2048(verbose=verbose)])
+            callbacks = dqn.fit(env, nb_steps=nb_steps, visualize=False, verbose=2, callbacks=[Logger2048(verbose=verbose)])
             dqn.save_weights(model_file.format(model_name=model_name, type="weights"), overwrite=True)
             model.save(model_file.format(model_name=model_name, type="topology"))
-            my_logger = get_callback(callbacks.callbacks, TrainLogger2048)
+            my_logger = get_callback(callbacks.callbacks, Logger2048)
             logger_rl = get_callback(callbacks.callbacks, TrainEpisodeLogger)
             save_history(my_logger, logger_file.format(type="train", model_name=model_name))
             save_history(logger_rl, logger_rl_file.format(type="train", model_name=model_name))
@@ -230,8 +230,8 @@ if __name__ == "__main__":
         for n in range(n_test_episodes):
             print("TEST EPISODE:", n + 1)
             env = GymBoard()
-            callbacks = dqn.test(env, nb_episodes=1, visualize=False, verbose=2, callbacks=[TestLogger2048(verbose=verbose)])
-            my_logger = get_callback(callbacks.callbacks, TestLogger2048)
+            callbacks = dqn.test(env, nb_episodes=1, visualize=False, verbose=2, callbacks=[Logger2048(verbose=verbose)])
+            my_logger = get_callback(callbacks.callbacks, Logger2048)
             dqn_tests.append(my_logger.episodes[0])
             env = GymBoard(random_seed=env.random_seed)
             random_tests.append(play_random_game(env=env))
